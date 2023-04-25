@@ -151,9 +151,9 @@ resource "aws_launch_template" "Static-Web-LT" {
 
 resource "aws_autoscaling_group" "Static-Web-asg" {
   vpc_zone_identifier = [ aws_subnet.public1A.id, aws_subnet.public1B.id ]
-  desired_capacity          = 2
+  desired_capacity          = 1
   max_size                  = 5
-  min_size                  = 2
+  min_size                  = 1
   health_check_grace_period = 300
   target_group_arns = [aws_lb_target_group.Static-Web-tg.arn]
 
@@ -163,12 +163,12 @@ resource "aws_autoscaling_group" "Static-Web-asg" {
   }
 }
 
-data "aws_route53_zone" "sentra-hosted-zone" {
+data "aws_route53_zone" "mehmet-hosted_zone" {
   name         = "mehmetspage.click" 
   private_zone = false
 }
 
-resource "aws_route53_record" "sentra" {
+resource "aws_route53_record" "mehmets-record" {
   zone_id = "Z0191374EX6AVFUDVI4"
   name    = "www.mehmetspage.click"
   type    = "A"
